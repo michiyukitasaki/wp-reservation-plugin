@@ -1,0 +1,58 @@
+#wp-reservation-container {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#wp-reservation-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+#wp-reservation-calendar div {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+
+#wp-reservation-calendar div:hover {
+    background-color: #0073aa;
+    color: white;
+}
+
+#wp-reservation-form {
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+#wp-reservation-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#wp-reservation-form input, 
+#wp-reservation-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#wp-reservation-form button {
+    background-color: #0073aa;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#wp-reservation-form button:hover {
+    background-color: #005177;
+}

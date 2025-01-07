@@ -1,0 +1,72 @@
+/* カレンダーの基本スタイル */
+#wp-reservation-calendar {
+    margin: 20px 0;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-header h2 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.calendar-header button {
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.calendar-header button:hover {
+    background-color: #005177;
+}
+
+.calendar-days-of-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.calendar-day-of-week {
+    text-align: center;
+    font-weight: bold;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-cell {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.calendar-cell.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.calendar-cell.clickable:hover {
+    background-color: #0073aa;
+    color: white;
+}
+
+.calendar-cell.empty {
+    visibility: hidden;
+}
