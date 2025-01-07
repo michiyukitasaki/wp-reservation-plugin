@@ -1,6 +1,11 @@
 /* カレンダーの基本スタイル */
 #wp-reservation-calendar {
     margin: 20px 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .calendar-header {
@@ -69,4 +74,48 @@
 
 .calendar-cell.empty {
     visibility: hidden;
+}
+
+/* フォームのスタイル */
+#wp-reservation-form-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#wp-reservation-form-container h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+#wp-reservation-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#wp-reservation-form input,
+#wp-reservation-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#wp-reservation-form button {
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+#wp-reservation-form button:hover {
+    background-color: #005177;
 }
