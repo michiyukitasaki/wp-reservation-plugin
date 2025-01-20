@@ -119,3 +119,61 @@
 #wp-reservation-form button:hover {
     background-color: #005177;
 }
+
+/* 時間スロットボタンのスタイル */
+.slot-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+button.available {
+    background-color: #28a745; /* 緑色 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+button.available:hover {
+    background-color: #218838;
+}
+
+button.limited {
+    background-color: #007bff; /* 青色 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+button.limited:hover {
+    background-color: #0056b3;
+}
+
+button.few {
+    background-color: #ffc107; /* 黄色 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+button.few:hover {
+    background-color: #e0a800;
+}
+
+button.full {
+    background-color: #dc3545; /* 赤色 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: not-allowed;
+    border-radius: 4px;
+}

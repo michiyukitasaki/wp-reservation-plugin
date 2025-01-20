@@ -7,26 +7,26 @@ $time_slots = explode(',', get_option('wp_reservation_time_slots', ''));
 ?>
 
 <div id="wp-reservation-form-container">
-    <h2>Make a Reservation</h2>
+    <h2>予約をする</h2>
     <div id="wp-reservation-calendar"></div>
     <div id="wp-reservation-form" style="display:none;">
         <form id="reservationForm">
             <input type="hidden" id="reservationDate" name="reservation_date" required>
             <input type="hidden" id="reservationTimeSlot" name="time_slot" required>
 
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            <label for="name">名前：</label>
+            <input type="text" id="name" name="name" placeholder="お名前" required>
 
-            <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+            <label for="phone">電話番号：</label>
+            <input type="tel" id="phone" name="phone" placeholder="電話番号" required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+            <label for="email">メールアドレス：</label>
+            <input type="email" id="email" name="email" placeholder="メールアドレス" required>
 
-            <label for="notes">Notes:</label>
-            <textarea id="notes" name="notes" placeholder="Additional Notes"></textarea>
+            <label for="notes">備考：</label>
+            <textarea id="notes" name="notes" placeholder="備考"></textarea>
 
-            <button type="submit" class="button">Reserve</button>
+            <button type="submit" class="button">予約する</button>
         </form>
     </div>
 </div>

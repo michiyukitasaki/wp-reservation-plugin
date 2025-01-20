@@ -23,6 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
         "土曜日": "Saturday"
     };
 
+    // 日本語の曜日名を短縮形に変換
+    const shortDayMap = {
+        "日曜日": "日",
+        "月曜日": "月",
+        "火曜日": "火",
+        "水曜日": "水",
+        "木曜日": "木",
+        "金曜日": "金",
+        "土曜日": "土"
+    };
+
     // 今日の日付
     let currentDate = new Date();
 
@@ -50,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         daysOfWeek.forEach(day => {
             const dayElement = document.createElement("div");
             dayElement.classList.add("calendar-day-of-week");
-            dayElement.textContent = day;
+            dayElement.textContent = shortDayMap[day];
             daysOfWeekRow.appendChild(dayElement);
         });
         calendarContainer.appendChild(daysOfWeekRow);
@@ -111,11 +122,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 時間スロットのセクションをクリアして再描画
         const timeSlotContainer = document.createElement("div");
-        timeSlotContainer.innerHTML = `<h3>Available Time Slots for ${date}</h3>`;
+        timeSlotContainer.innerHTML = `<h3>${date}の予約可能な時間帯</h3>`;
 
         if (timeSlots.length === 0) {
-            timeSlotContainer.innerHTML += `<p>No available time slots for this date.</p>`;
+            timeSlotContainer.innerHTML += `<p>この日の予約可能な時間帯はありません。</p>`;
         } else {
+            const slotList = document.createElement("div");
+            slotList.classList.add("slot-list");
             timeSlots.forEach((slot) => {
                 const slotButton = document.createElement("button");
                 slotButton.textContent = slot;
@@ -124,19 +137,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 fetch(`/wp-json/wp-reservation/v1/availability?date=${encodeURIComponent(date)}&time_slot=${encodeURIComponent(slot)}`)
                     .then(response => response.json())
                     .then(data => {
-                        slotButton.textContent += ` (${data.available} available)`;
+                        slotButton.textContent += ` (${data.available} 残り)`;
+
+                        // 残数によってボタンの色を変更
+                        if (data.available >= 3) {
+                            slotButton.classList.add("available");
+                        } else if (data.available == 2) {
+                            slotButton.classList.add("limited");
+                        } else if (data.available == 1) {
+                            slotButton.classList.add("few");
+                        } else {
+                            slotButton.classList.add("full");
+                            slotButton.disabled = true;
+                        }
+
                         if (data.available > 0) {
                             slotButton.addEventListener("click", () => {
                                 reservationTimeSlotInput.value = slot;
                                 formContainer.style.display = "block";
                             });
-                        } else {
-                            slotButton.disabled = true;
                         }
                     });
 
-                timeSlotContainer.appendChild(slotButton);
+                slotList.appendChild(slotButton);
             });
+            timeSlotContainer.appendChild(slotList);
         }
 
         calendarContainer.innerHTML = ""; // カレンダーをクリア
@@ -156,15 +181,16 @@ document.addEventListener("DOMContentLoaded", () => {
             .then((response) => response.json())
             .then((data) => {
                 if (data.success) {
-                    alert("Reservation successful!");
+                    alert("予約完了しました！");
                     form.reset();
                     formContainer.style.display = "none";
+                    window.location.href = "/"; // ホーム画面に戻る
                 } else {
-                    alert(data.message || "Failed to make reservation.");
+                    alert(data.message || "予約に失敗しました。");
                 }
             })
             .catch(() => {
-                alert("Error processing reservation.");
+                alert("予約処理中にエラーが発生しました。");
             });
     });
 
