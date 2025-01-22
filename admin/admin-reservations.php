@@ -8,11 +8,15 @@ function wp_reservation_admin_reservations_page() {
 
     // フィルタリング
     $filter_date = isset($_GET['filter_date']) ? sanitize_text_field($_GET['filter_date']) : '';
+    $filter_month = isset($_GET['filter_month']) ? sanitize_text_field($_GET['filter_month']) : '';
     $filter_name = isset($_GET['filter_name']) ? sanitize_text_field($_GET['filter_name']) : '';
 
     $query = "SELECT * FROM $table_name WHERE 1=1";
     if ($filter_date) {
         $query .= $wpdb->prepare(" AND date = %s", $filter_date);
+    }
+    if ($filter_month) {
+        $query .= $wpdb->prepare(" AND DATE_FORMAT(date, '%Y-%m') = %s", $filter_month);
     }
     if ($filter_name) {
         $query .= $wpdb->prepare(" AND name LIKE %s", '%' . $wpdb->esc_like($filter_name) . '%');
@@ -54,49 +58,63 @@ function wp_reservation_admin_reservations_page() {
     ?>
     <div class="wrap">
         <h1>予約管理</h1>
-        <form method="GET" action="">
-            <input type="hidden" name="page" value="wp-reservation-manage">
-            <input type="date" name="filter_date" value="<?php echo esc_attr($filter_date); ?>">
-            <input type="text" name="filter_name" placeholder="名前で検索" value="<?php echo esc_attr($filter_name); ?>">
-            <button type="submit" class="button">フィルター</button>
-        </form>
-        <table class="widefat fixed" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>日付</th>
-                    <th>時間帯</th>
-                    <th>名前</th>
-                    <th>電話番号</th>
-                    <th>メールアドレス</th>
-                    <th>備考</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (!empty($reservations)): ?>
-                    <?php foreach ($reservations as $reservation): ?>
-                        <tr>
-                            <td><?php echo esc_html($reservation->id); ?></td>
-                            <td><?php echo esc_html($reservation->date); ?></td>
-                            <td><?php echo esc_html($reservation->time_slot); ?></td>
-                            <td><?php echo esc_html($reservation->name); ?></td>
-                            <td><?php echo esc_html($reservation->phone); ?></td>
-                            <td><?php echo esc_html($reservation->email); ?></td>
-                            <td><?php echo esc_html($reservation->notes); ?></td>
-                            <td>
-                                <a href="?page=wp-reservation-manage&delete_id=<?php echo esc_attr($reservation->id); ?>" class="button">削除</a>
-                                <button type="button" class="button edit-button" data-id="<?php echo esc_attr($reservation->id); ?>">編集</button>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
+        <div class="filter-box">
+            <form method="GET" action="">
+                <input type="hidden" name="page" value="wp-reservation-manage">
+                <div class="filter-item">
+                    <label for="filter_date"><strong>日付でフィルタリング:</strong></label>
+                    <input type="date" id="filter_date" name="filter_date" value="<?php echo esc_attr($filter_date); ?>">
+                </div>
+                <div class="filter-item">
+                    <label for="filter_month"><strong>月でフィルタリング:</strong></label>
+                    <input type="month" id="filter_month" name="filter_month" value="<?php echo esc_attr($filter_month); ?>">
+                </div>
+                <div class="filter-item">
+                    <label for="filter_name"><strong>名前でフィルタリング:</strong></label>
+                    <input type="text" id="filter_name" name="filter_name" placeholder="名前" value="<?php echo esc_attr($filter_name); ?>">
+                </div>
+                <button type="submit" class="button button-primary">検索</button>
+            </form>
+        </div>
+        <div class="data-box">
+            <table class="widefat fixed" cellspacing="0">
+                <thead>
                     <tr>
-                        <td colspan="8">予約が見つかりません。</td>
+                        <th>ID</th>
+                        <th>日付</th>
+                        <th>時間帯</th>
+                        <th>名前</th>
+                        <th>電話番号</th>
+                        <th>メールアドレス</th>
+                        <th>備考</th>
+                        <th>操作</th>
                     </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php if (!empty($reservations)): ?>
+                        <?php foreach ($reservations as $reservation): ?>
+                            <tr>
+                                <td><?php echo esc_html($reservation->id); ?></td>
+                                <td><?php echo esc_html($reservation->date); ?></td>
+                                <td><?php echo esc_html($reservation->time_slot); ?></td>
+                                <td><?php echo esc_html($reservation->name); ?></td>
+                                <td><?php echo esc_html($reservation->phone); ?></td>
+                                <td><?php echo esc_html($reservation->email); ?></td>
+                                <td><?php echo esc_html($reservation->notes); ?></td>
+                                <td>
+                                    <a href="?page=wp-reservation-manage&delete_id=<?php echo esc_attr($reservation->id); ?>" class="button">削除</a>
+                                    <button type="button" class="button edit-button" data-id="<?php echo esc_attr($reservation->id); ?>">編集</button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="8">予約が見つかりません。</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
 
         <!-- 編集モーダル -->
         <div id="editModal" style="display:none; z-index: 9999;">

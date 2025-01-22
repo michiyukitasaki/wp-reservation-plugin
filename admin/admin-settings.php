@@ -29,7 +29,7 @@ function wp_reservation_settings_page() {
             <table class="form-table">
                 <!-- 予約可能な曜日 -->
                 <tr>
-                    <th><label for="reservation_days">Reservation Days</label></th>
+                    <th><label for="reservation_days">予約可能な曜日</label></th>
                     <td>
                         <?php
                         $all_days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -42,24 +42,24 @@ function wp_reservation_settings_page() {
 
                 <!-- 予約可能な時間帯 -->
                 <tr>
-                    <th><label for="time_slots">Time Slots</label></th>
+                    <th><label for="time_slots">予約可能な時間帯</label></th>
                     <td>
                         <input type="text" id="time_slots" name="time_slots" value="<?php echo esc_attr($time_slots); ?>" placeholder="e.g., 10:30-12:00,13:30-15:00">
-                        <p class="description">Enter time slots separated by commas (e.g., 10:30-12:00,13:30-15:00).</p>
+                        <p class="description">例のような表記方法で入力してください (例： 10:30-12:00,13:30-15:00).</p>
                     </td>
                 </tr>
 
                 <!-- 最大人数 -->
                 <tr>
-                    <th><label for="max_people">Max People per Slot</label></th>
+                    <th><label for="max_people">1枠あたりの最大予約可能人数</label></th>
                     <td>
                         <input type="number" id="max_people" name="max_people" value="<?php echo esc_attr($max_people); ?>" min="1">
-                        <p class="description">Set the maximum number of people allowed per time slot.</p>
+                        <p class="description">1枠あたりの最大予約可能人数を例のように入力してください（例：3）</p>
                     </td>
                 </tr>
             </table>
             <p class="submit">
-                <input type="submit" class="button-primary" value="Save Changes">
+                <input type="submit" class="button-primary" value="設定を保存">
             </p>
         </form>
     </div>
