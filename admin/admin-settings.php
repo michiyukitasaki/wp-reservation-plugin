@@ -23,7 +23,7 @@ function wp_reservation_settings_page() {
 
     ?>
     <div class="wrap">
-        <h1>Reservation Settings</h1>
+        <h1>予約システムの設定</h1>
         <form method="POST">
             <?php wp_nonce_field('save_wp_reservation_settings', 'wp_reservation_settings_nonce'); ?>
             <table class="form-table">

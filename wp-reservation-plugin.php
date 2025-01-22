@@ -23,8 +23,8 @@ register_activation_hook(__FILE__, 'wp_reservation_db_setup');
 add_action('admin_menu', 'wp_reservation_admin_menu');
 function wp_reservation_admin_menu() {
     add_menu_page(
-        'Reservation Settings',        // ページタイトル
-        'Reservations',                // メニュータイトル
+        '予約システム設定',            // ページタイトル
+        '予約システムの設定',                // メニュータイトル
         'manage_options',              // 必要な権限
         'wp-reservation-settings',     // スラッグ
         'wp_reservation_settings_page',// コールバック関数
@@ -32,8 +32,8 @@ function wp_reservation_admin_menu() {
     );
     add_submenu_page(
         'wp-reservation-settings',     // 親メニューのスラッグ
-        'Manage Reservations',         // サブメニューのページタイトル
-        'Manage Reservations',         // サブメニューの名前
+        '予約情報一覧',                    // サブメニューのページタイトル
+        '予約情報一覧',                    // サブメニューの名前
         'manage_options',              // 必要な権限
         'wp-reservation-manage',       // サブメニューのスラッグ
         'wp_reservation_manage_page'   // コールバック関数
@@ -116,7 +116,7 @@ function wp_reservation_manage_page() {
 
     ?>
     <div class="wrap">
-        <h1>予約管理</h1>
+        <h1>予約情報一覧</h1>
         <div class="filter-box">
             <form method="GET" action="">
                 <input type="hidden" name="page" value="wp-reservation-manage">
@@ -129,10 +129,10 @@ function wp_reservation_manage_page() {
                     <input type="month" id="filter_month" name="filter_month" value="<?php echo esc_attr($filter_month); ?>">
                 </div>
                 <div class="filter-item">
-                    <label for="filter_name"><strong>名前で検索:</strong></label>
+                    <label for="filter_name"><strong>名前でフィルタリング:</strong></label>
                     <input type="text" id="filter_name" name="filter_name" placeholder="名前で検索" value="<?php echo esc_attr($filter_name); ?>">
                 </div>
-                <button type="submit" class="button button-primary">フィルター</button>
+                <button type="submit" class="button button-primary">検索</button>
             </form>
         </div>
         <div class="data-box">

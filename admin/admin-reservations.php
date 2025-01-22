@@ -57,7 +57,7 @@ function wp_reservation_admin_reservations_page() {
 
     ?>
     <div class="wrap">
-        <h1>予約管理</h1>
+        <h1>予約情報一覧</h1>
         <div class="filter-box">
             <form method="GET" action="">
                 <input type="hidden" name="page" value="wp-reservation-manage">
