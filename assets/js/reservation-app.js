@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("reservationForm");
     const reservationDateInput = document.getElementById("reservationDate");
     const reservationTimeSlotInput = document.getElementById("reservationTimeSlot");
-    const backToCalendarButton = document.getElementById("back-to-calendar");
 
     // 予約可能な曜日と時間帯を取得
     const reservationDays = wpReservationSettings.reservationDays || [];
@@ -178,43 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
         timeSlotsContainer.appendChild(timeSlotContainer); // 時間スロットを描画
         timeSlotsContainer.style.display = 'block'; // 時間スロットを表示
     }
-
-    // カレンダーに戻る関数
-    function showCalendar() {
-        timeSlotsContainer.style.display = 'none';
-        calendarContainer.style.display = 'block';
-    }
-
-    // 戻るボタンのイベントリスナー
-    backToCalendarButton.addEventListener('click', function () {
-        showCalendar();
-    });
-
-    // フォーム送信
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-
-        fetch("/wp-json/wp-reservation/v1/reserve", {
-            method: "POST",
-            body: formData,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    alert("予約完了しました！");
-                    form.reset();
-                    formContainer.style.display = "none";
-                    window.location.href = "/"; // ホーム画面に戻る
-                } else {
-                    alert(data.message || "予約に失敗しました。");
-                }
-            })
-            .catch(() => {
-                alert("予約処理中にエラーが発生しました。");
-            });
-    });
 
     // 初期のカレンダーを表示
     renderCalendar(currentDate);

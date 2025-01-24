@@ -2,7 +2,6 @@
 #wp-reservation-calendar {
     margin: 20px 0;
     background-color: #fff;
-    border: 1px solid #8B4513; /* ブラウン色 */
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -82,8 +81,8 @@
 
 /* フォームのスタイル */
 #wp-reservation-form-container {
+    position: relative;
     background-color: #fff;
-    border: 1px solid #8B4513; /* ブラウン色 */
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -100,6 +99,11 @@
     margin-bottom: 5px;
     font-weight: bold;
     color: #8B4513; /* ブラウン色 */
+}
+
+#wp-reservation-form label i {
+    margin-right: 8px;
+    color: var(--theme-color); /* テーマカラー */
 }
 
 #wp-reservation-form input,
@@ -231,18 +235,17 @@ button.full {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-#back-to-calendar {
-    background: linear-gradient(145deg, #8B4513, #A0522D); /* グラデーション */
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: background 0.3s ease, transform 0.3s ease;
-    margin-bottom: 20px;
+.back-to-home-link {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #8B4513; /* ブラウン色 */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-size: 24px;
 }
 
-#back-to-calendar:hover {
-    background: linear-gradient(145deg, #5A2D0C, #8B4513); /* ダークブラウンのグラデーション */
-    transform: scale(1.05);
+.back-to-home-link:hover {
+    color: #5A2D0C; /* ダークブラウン色 */
 }
