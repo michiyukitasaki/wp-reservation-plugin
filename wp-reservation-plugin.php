@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: WP Reservation Plugin
+Plugin Name: Easy Reservation systems
 Description: A WordPress plugin to manage reservations with customizable settings and a user-friendly interface.
 Version: 1.0.0
 Author: Your Name

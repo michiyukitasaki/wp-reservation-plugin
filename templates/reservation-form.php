@@ -17,6 +17,7 @@ $time_slots = explode(',', get_option('wp_reservation_time_slots', ''));
         <!-- ...existing code... -->
     </div>
     <div id="wp-reservation-form" style="display:none;">
+        <button id="back-to-time-slots" class="button">時間帯に戻る</button>
         <form id="reservationForm">
             <input type="hidden" id="reservationDate" name="reservation_date" required>
             <input type="hidden" id="reservationTimeSlot" name="time_slot" required>
@@ -35,6 +36,7 @@ $time_slots = explode(',', get_option('wp_reservation_time_slots', ''));
 
             <button type="submit" class="button">予約する</button>
         </form>
+        <button id="back-to-home" class="button">ホームに戻る</button>
     </div>
 </div>
 
@@ -42,18 +44,35 @@ $time_slots = explode(',', get_option('wp_reservation_time_slots', ''));
     document.addEventListener('DOMContentLoaded', function () {
         const calendar = document.getElementById('wp-reservation-calendar');
         const timeSlots = document.getElementById('wp-reservation-time-slots');
+        const reservationForm = document.getElementById('wp-reservation-form');
         const backToCalendarButton = document.getElementById('back-to-calendar');
+        const backToTimeSlotsButton = document.getElementById('back-to-time-slots');
+        const backToHomeButton = document.getElementById('back-to-home');
 
         // 時間帯を表示する関数
         function showTimeSlots() {
             calendar.style.display = 'none';
             timeSlots.style.display = 'block';
+            reservationForm.style.display = 'none';
         }
 
         // カレンダーに戻る関数
         function showCalendar() {
             timeSlots.style.display = 'none';
             calendar.style.display = 'block';
+            reservationForm.style.display = 'none';
+        }
+
+        // 予約フォームに戻る関数
+        function showReservationForm() {
+            timeSlots.style.display = 'none';
+            calendar.style.display = 'none';
+            reservationForm.style.display = 'block';
+        }
+
+        // ホームに戻る関数
+        function goToHome() {
+            window.location.href = '/';
         }
 
         // 戻るボタンのイベントリスナー
@@ -61,10 +80,25 @@ $time_slots = explode(',', get_option('wp_reservation_time_slots', ''));
             showCalendar();
         });
 
+        backToTimeSlotsButton.addEventListener('click', function () {
+            showTimeSlots();
+        });
+
+        backToHomeButton.addEventListener('click', function () {
+            goToHome();
+        });
+
         // カレンダーの日付クリックイベント
         document.querySelectorAll('.calendar-cell.clickable').forEach(cell => {
             cell.addEventListener('click', function () {
                 showTimeSlots();
+            });
+        });
+
+        // 時間帯のボタンクリックイベント
+        document.querySelectorAll('.slot-list button').forEach(button => {
+            button.addEventListener('click', function () {
+                showReservationForm();
             });
         });
     });
