@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Easy Reservation systems
+Plugin Name: Easy Reservation Systems
 Description: A WordPress plugin to manage reservations with customizable settings and a user-friendly interface.
 Version: 1.0.0
-Author: Your Name
+Author: Michiyuki Tasaki
 License: GPL-2.0-or-later
 */
 
