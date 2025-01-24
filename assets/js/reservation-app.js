@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     const calendarContainer = document.getElementById("wp-reservation-calendar");
+    const timeSlotsContainer = document.getElementById("wp-reservation-time-slots");
     const formContainer = document.getElementById("wp-reservation-form");
     const form = document.getElementById("reservationForm");
     const reservationDateInput = document.getElementById("reservationDate");
     const reservationTimeSlotInput = document.getElementById("reservationTimeSlot");
+    const backToCalendarButton = document.getElementById("back-to-calendar");
 
     // 予約可能な曜日と時間帯を取得
     const reservationDays = wpReservationSettings.reservationDays || [];
@@ -120,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log('Clicked Date:', date); // デバッグ用
         reservationDateInput.value = date;
 
-        // 時間スロットのセクションをクリアして再描画
         const timeSlotContainer = document.createElement("div");
         timeSlotContainer.innerHTML = `<h3>${date}の予約可能な時間帯</h3>`;
 
@@ -137,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 fetch(`/wp-json/wp-reservation/v1/availability?date=${encodeURIComponent(date)}&time_slot=${encodeURIComponent(slot)}`)
                     .then(response => response.json())
                     .then(data => {
-                        slotButton.textContent += ` (${data.available} 残り)`;
+                        slotButton.textContent += ` (残り：${data.available})`;
 
                         // 残数によってボタンの色を変更
                         if (data.available >= 3) {
@@ -153,6 +154,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         if (data.available > 0) {
                             slotButton.addEventListener("click", () => {
+                                // 他のボタンを非表示にする
+                                const allButtons = slotList.querySelectorAll("button");
+                                allButtons.forEach(btn => {
+                                    if (btn !== slotButton) {
+                                        btn.style.display = "none";
+                                    }
+                                });
+
                                 reservationTimeSlotInput.value = slot;
                                 formContainer.style.display = "block";
                             });
@@ -164,9 +173,22 @@ document.addEventListener("DOMContentLoaded", () => {
             timeSlotContainer.appendChild(slotList);
         }
 
-        calendarContainer.innerHTML = ""; // カレンダーをクリア
-        calendarContainer.appendChild(timeSlotContainer); // 時間スロットを描画
+        calendarContainer.style.display = 'none'; // カレンダーを非表示
+        timeSlotsContainer.innerHTML = ""; // 時間スロットをクリア
+        timeSlotsContainer.appendChild(timeSlotContainer); // 時間スロットを描画
+        timeSlotsContainer.style.display = 'block'; // 時間スロットを表示
     }
+
+    // カレンダーに戻る関数
+    function showCalendar() {
+        timeSlotsContainer.style.display = 'none';
+        calendarContainer.style.display = 'block';
+    }
+
+    // 戻るボタンのイベントリスナー
+    backToCalendarButton.addEventListener('click', function () {
+        showCalendar();
+    });
 
     // フォーム送信
     form.addEventListener("submit", (e) => {

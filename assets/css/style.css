@@ -177,3 +177,49 @@ button.full {
     cursor: not-allowed;
     border-radius: 4px;
 }
+
+/* フィルタリング部分とデータ表示部分のスタイル */
+.filter-box {
+    background-color: #f9f9f9;
+    border: 2px solid #0073aa;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.filter-box .filter-item {
+    margin-bottom: 10px;
+}
+
+.filter-box label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.filter-box input[type="date"],
+.filter-box input[type="month"],
+.filter-box input[type="text"] {
+    margin-right: 10px;
+}
+
+.data-box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+#back-to-calendar {
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+#back-to-calendar:hover {
+    background-color: #005177;
+}

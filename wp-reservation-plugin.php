@@ -14,7 +14,7 @@ require_once plugin_dir_path(__FILE__) . 'includes/db-setup.php';
 require_once plugin_dir_path(__FILE__) . 'includes/reservation-handler.php';
 require_once plugin_dir_path(__FILE__) . 'includes/settings-handler.php';
 require_once plugin_dir_path(__FILE__) . 'admin/admin-settings.php';
-require_once plugin_dir_path(__FILE__) . 'admin/admin-reservations.php';
+
 
 // プラグインのアクティベーション時にデータベーステーブルを作成
 register_activation_hook(__FILE__, 'wp_reservation_db_setup');
