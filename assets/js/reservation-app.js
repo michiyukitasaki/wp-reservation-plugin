@@ -137,7 +137,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 fetch(`/wp-json/wp-reservation/v1/availability?date=${encodeURIComponent(date)}&time_slot=${encodeURIComponent(slot)}`)
                     .then(response => response.json())
                     .then(data => {
-                        slotButton.textContent += ` (残り：${data.available})`;
+                        const badge = document.createElement("span");
+                        badge.classList.add("badge");
+                        badge.textContent = `残り ${data.available}`;
+
+                        slotButton.appendChild(badge);
 
                         // 残数によってボタンの色を変更
                         if (data.available >= 3) {

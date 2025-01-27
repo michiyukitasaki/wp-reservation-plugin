@@ -2,7 +2,7 @@
 Contributors: koromo1118
 Tags: reservation, booking, calendar, appointment
 Requires at least: 5.0
-Tested up to: 6.0
+Tested up to: 6.7
 Stable tag: 1.0.0
 Requires PHP: 7.4
 License: GPL-2.0-or-later
