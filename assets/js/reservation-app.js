@@ -122,7 +122,12 @@ document.addEventListener("DOMContentLoaded", () => {
         reservationDateInput.value = date;
 
         const timeSlotContainer = document.createElement("div");
-        timeSlotContainer.innerHTML = `<h3>${date}の予約可能な時間帯</h3>`;
+        timeSlotContainer.innerHTML = `
+            <div class="time-slot-header">
+                <h3><i class="fas fa-clock"></i> ${date}の予約可能な時間帯</h3>
+                <p>以下の時間帯から選択してください。</p>
+            </div>
+        `;
 
         if (timeSlots.length === 0) {
             timeSlotContainer.innerHTML += `<p>この日の予約可能な時間帯はありません。</p>`;
