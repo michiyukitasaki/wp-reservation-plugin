@@ -10,6 +10,7 @@ function wp_reservation_settings_page() {
             update_option('wp_reservation_days', isset($_POST['reservation_days']) ? array_map('sanitize_text_field', $_POST['reservation_days']) : []);
             update_option('wp_reservation_time_slots', isset($_POST['time_slots']) ? sanitize_text_field($_POST['time_slots']) : '');
             update_option('wp_reservation_max_people', isset($_POST['max_people']) ? intval($_POST['max_people']) : 3);
+            update_option('wp_reservation_theme_color', isset($_POST['theme_color']) ? sanitize_hex_color($_POST['theme_color']) : '#8B4513');
 
             // 成功メッセージ
             echo '<div class="updated"><p>Settings saved successfully!</p></div>';
@@ -20,6 +21,7 @@ function wp_reservation_settings_page() {
     $reservation_days = get_option('wp_reservation_days', []);
     $time_slots = get_option('wp_reservation_time_slots', '');
     $max_people = get_option('wp_reservation_max_people', 3);
+    $theme_color = get_option('wp_reservation_theme_color', '#8B4513');
 
     ?>
     <div class="wrap">
@@ -55,6 +57,15 @@ function wp_reservation_settings_page() {
                     <td>
                         <input type="number" id="max_people" name="max_people" value="<?php echo esc_attr($max_people); ?>" min="1">
                         <p class="description">1枠あたりの最大予約可能人数を例のように入力してください（例：3）</p>
+                    </td>
+                </tr>
+
+                <!-- テーマカラー -->
+                <tr>
+                    <th><label for="theme_color">テーマカラー</label></th>
+                    <td>
+                        <input type="color" id="theme_color" name="theme_color" value="<?php echo esc_attr($theme_color); ?>">
+                        <p class="description">テーマカラーを選択してください。</p>
                     </td>
                 </tr>
             </table>

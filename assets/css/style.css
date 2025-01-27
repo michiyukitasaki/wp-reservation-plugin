@@ -1,3 +1,9 @@
+:root {
+    --theme-color: <?php echo get_option('wp_reservation_theme_color', '#8B4513'); ?>;
+    --theme-color-dark: <?php echo adjustBrightness(get_option('wp_reservation_theme_color', '#8B4513'), -40); ?>;
+    --theme-color-light: <?php echo adjustBrightness(get_option('wp_reservation_theme_color', '#8B4513'), 40); ?>;
+}
+
 /* カレンダーの基本スタイル */
 #wp-reservation-calendar {
     margin: 20px 0;
@@ -5,6 +11,7 @@
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--theme-color); /* テーマカラー */
 }
 
 .calendar-header {
@@ -17,11 +24,11 @@
 .calendar-header h2 {
     font-size: 1.8em;
     margin: 0;
-    color: #8B4513; /* ブラウン色 */
+    color: var(--theme-color); /* テーマカラー */
 }
 
 .calendar-header button {
-    background: linear-gradient(145deg, #8B4513, #A0522D); /* グラデーション */
+    background: linear-gradient(145deg, var(--theme-color), var(--theme-color-light)); /* グラデーション */
     color: white;
     border: none;
     padding: 8px 12px;
@@ -31,7 +38,7 @@
 }
 
 .calendar-header button:hover {
-    background: linear-gradient(145deg, #5A2D0C, #8B4513); /* ダークブラウンのグラデーション */
+    background: linear-gradient(145deg, var(--theme-color-dark), var(--theme-color)); /* ダークテーマカラーのグラデーション */
     transform: scale(1.05);
 }
 
@@ -45,7 +52,7 @@
 .calendar-day-of-week {
     text-align: center;
     font-weight: bold;
-    color: #8B4513; /* ブラウン色 */
+    color: var(--theme-color); /* テーマカラー */
 }
 
 .calendar-days {
@@ -57,7 +64,7 @@
 .calendar-cell {
     text-align: center;
     padding: 12px;
-    border: 1px solid #8B4513; /* ブラウン色 */
+    border: 1px solid var(--theme-color); /* テーマカラー */
     border-radius: 6px;
     background-color: #f9f9f9;
     cursor: pointer;
@@ -70,7 +77,7 @@
 }
 
 .calendar-cell.clickable:hover {
-    background-color: #8B4513; /* ブラウン色 */
+    background-color: var(--theme-color); /* テーマカラー */
     color: white;
     transform: scale(1.05);
 }
@@ -86,19 +93,20 @@
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--theme-color); /* テーマカラー */
 }
 
 #wp-reservation-form-container h2 {
     font-size: 1.8em;
     margin-bottom: 20px;
-    color: #8B4513; /* ブラウン色 */
+    color: var(--theme-color); /* テーマカラー */
 }
 
 #wp-reservation-form label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #8B4513; /* ブラウン色 */
+    color: var(--theme-color); /* テーマカラー */
 }
 
 #wp-reservation-form label i {
@@ -111,7 +119,7 @@
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    border: 1px solid #8B4513; /* ブラウン色 */
+    border: 1px solid var(--theme-color); /* テーマカラー */
     border-radius: 6px;
     box-sizing: border-box;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -119,12 +127,12 @@
 
 #wp-reservation-form input:focus,
 #wp-reservation-form textarea:focus {
-    border-color: #A0522D; /* ダークブラウン色 */
+    border-color: var(--theme-color); /* テーマカラー */
     box-shadow: 0 0 8px rgba(138, 69, 19, 0.3);
 }
 
 #wp-reservation-form button {
-    background: linear-gradient(145deg, #8B4513, #A0522D); /* グラデーション */
+    background: linear-gradient(145deg, var(--theme-color), var(--theme-color-light)); /* グラデーション */
     color: white;
     border: none;
     padding: 12px 24px;
@@ -134,7 +142,7 @@
 }
 
 #wp-reservation-form button:hover {
-    background: linear-gradient(145deg, #5A2D0C, #8B4513); /* ダークブラウンのグラデーション */
+    background: linear-gradient(145deg, var(--theme-color-dark), var(--theme-color)); /* ダークテーマカラーのグラデーション */
     transform: scale(1.05);
 }
 
@@ -146,7 +154,7 @@
 }
 
 button.available {
-    background: linear-gradient(145deg, #8B4513, #A0522D); /* グラデーション */
+    background: linear-gradient(145deg, var(--theme-color), var(--theme-color-light)); /* グラデーション */
     color: white;
     border: none;
     padding: 12px 24px;
@@ -156,12 +164,12 @@ button.available {
 }
 
 button.available:hover {
-    background: linear-gradient(145deg, #5A2D0C, #8B4513); /* ダークブラウンのグラデーション */
+    background: linear-gradient(145deg, var(--theme-color-dark), var(--theme-color)); /* ダークテーマカラーのグラデーション */
     transform: scale(1.05);
 }
 
 button.limited {
-    background: linear-gradient(145deg, #A0522D, #CD853F); /* グラデーション */
+    background: linear-gradient(145deg, var(--theme-color-light), var(--theme-color)); /* グラデーション */
     color: white;
     border: none;
     padding: 12px 24px;
@@ -171,12 +179,12 @@ button.limited {
 }
 
 button.limited:hover {
-    background: linear-gradient(145deg, #8B4513, #A0522D); /* ダークブラウンのグラデーション */
+    background: linear-gradient(145deg, var(--theme-color-dark), var(--theme-color)); /* ダークテーマカラーのグラデーション */
     transform: scale(1.05);
 }
 
 button.few {
-    background: linear-gradient(145deg, #CD853F, #D2B48C); /* グラデーション */
+    background: linear-gradient(145deg, var(--theme-color-light), var(--theme-color)); /* グラデーション */
     color: white;
     border: none;
     padding: 12px 24px;
@@ -186,12 +194,12 @@ button.few {
 }
 
 button.few:hover {
-    background: linear-gradient(145deg, #A0522D, #CD853F); /* ダークブラウンのグラデーション */
+    background: linear-gradient(145deg, var(--theme-color-dark), var(--theme-color)); /* ダークテーマカラーのグラデーション */
     transform: scale(1.05);
 }
 
 button.full {
-    background: linear-gradient(145deg, #D2B48C, #DEB887); /* グラデーション */
+    background: linear-gradient(145deg, var(--theme-color-light), var(--theme-color)); /* グラデーション */
     color: white;
     border: none;
     padding: 12px 24px;
@@ -202,7 +210,7 @@ button.full {
 /* フィルタリング部分とデータ表示部分のスタイル */
 .filter-box {
     background-color: #f9f9f9;
-    border: 2px solid #8B4513; /* ブラウン色 */
+    border: 2px solid var(--theme-color); /* テーマカラー */
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 12px;
@@ -216,20 +224,20 @@ button.full {
 .filter-box label {
     font-weight: bold;
     margin-right: 10px;
-    color: #8B4513; /* ブラウン色 */
+    color: var(--theme-color); /* テーマカラー */
 }
 
 .filter-box input[type="date"],
 .filter-box input[type="month"],
 .filter-box input[type="text"] {
     margin-right: 10px;
-    border: 1px solid #8B4513; /* ブラウン色 */
+    border: 1px solid var(--theme-color); /* テーマカラー */
     border-radius: 6px;
 }
 
 .data-box {
     background-color: #fff;
-    border: 1px solid #8B4513; /* ブラウン色 */
+    border: 1px solid var(--theme-color); /* テーマカラー */
     padding: 15px;
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -239,7 +247,7 @@ button.full {
     position: absolute;
     top: 10px;
     right: 10px;
-    color: #8B4513; /* ブラウン色 */
+    color: var(--theme-color); /* テーマカラー */
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
@@ -247,5 +255,5 @@ button.full {
 }
 
 .back-to-home-link:hover {
-    color: #5A2D0C; /* ダークブラウン色 */
+    color: var(--theme-color-dark); /* ダークテーマカラー */
 }

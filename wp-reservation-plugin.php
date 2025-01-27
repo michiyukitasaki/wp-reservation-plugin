@@ -58,6 +58,45 @@ function enqueue_font_awesome() {
 }
 add_action('wp_enqueue_scripts', 'enqueue_font_awesome');
 
+// テーマカラーを動的に適用
+function wp_reservation_dynamic_styles() {
+    $theme_color = get_option('wp_reservation_theme_color', '#8B4513');
+    $theme_color_dark = adjustBrightness($theme_color, -40);
+    $theme_color_light = adjustBrightness($theme_color, 40);
+    echo "<style>
+        :root {
+            --theme-color: {$theme_color};
+            --theme-color-dark: {$theme_color_dark};
+            --theme-color-light: {$theme_color_light};
+        }
+    </style>";
+}
+add_action('wp_head', 'wp_reservation_dynamic_styles');
+
+// 明るさを調整する関数
+function adjustBrightness($hex, $steps) {
+    // Ensure steps is between -255 and 255
+    $steps = max(-255, min(255, $steps));
+
+    // Normalize into a six character long hex string
+    $hex = str_replace('#', '', $hex);
+    if (strlen($hex) == 3) {
+        $hex = str_repeat(substr($hex, 0, 1), 2) . str_repeat(substr($hex, 1, 1), 2) . str_repeat(substr($hex, 2, 1), 2);
+    }
+
+    // Split into three parts: R, G and B
+    $color_parts = str_split($hex, 2);
+    $return = '#';
+
+    foreach ($color_parts as $color) {
+        $color = hexdec($color); // Convert to decimal
+        $color = max(0, min(255, $color + $steps)); // Adjust color
+        $return .= str_pad(dechex($color), 2, '0', STR_PAD_LEFT); // Make two char hex code
+    }
+
+    return $return;
+}
+
 // ショートコードの登録
 add_shortcode('reservation_system', 'wp_reservation_form_shortcode');
 function wp_reservation_form_shortcode() {
