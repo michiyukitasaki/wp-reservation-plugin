@@ -69,6 +69,7 @@
     background-color: #f9f9f9;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    aspect-ratio: 1 / 1; /* アスペクト比を固定 */
 }
 
 .calendar-cell.disabled {
@@ -256,4 +257,25 @@ button.full {
 
 .back-to-home-link:hover {
     color: var(--theme-color-dark); /* ダークテーマカラー */
+}
+
+/* モバイル対応のスタイル */
+@media (max-width: 600px) {
+    .calendar-header h2 {
+        font-size: 1.2em;
+    }
+
+    .calendar-cell {
+        padding: 8px;
+        font-size: 0.8em;
+        aspect-ratio: 1 / 1; /* アスペクト比を固定 */
+    }
+
+    .calendar-days-of-week {
+        gap: 2px;
+    }
+
+    .calendar-days {
+        gap: 2px;
+    }
 }
