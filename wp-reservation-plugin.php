@@ -15,7 +15,6 @@ require_once plugin_dir_path(__FILE__) . 'includes/reservation-handler.php';
 require_once plugin_dir_path(__FILE__) . 'includes/settings-handler.php';
 require_once plugin_dir_path(__FILE__) . 'admin/admin-settings.php';
 
-
 // プラグインのアクティベーション時にデータベーステーブルを作成
 register_activation_hook(__FILE__, 'wp_reservation_db_setup');
 
@@ -54,24 +53,25 @@ function wp_reservation_enqueue_scripts() {
 }
 
 function enqueue_font_awesome() {
-    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+    wp_enqueue_style('font-awesome', plugin_dir_url(__FILE__) . 'assets/css/font-awesome.min.css');
 }
 add_action('wp_enqueue_scripts', 'enqueue_font_awesome');
+add_action('admin_enqueue_scripts', 'enqueue_font_awesome');
 
 // テーマカラーを動的に適用
 function wp_reservation_dynamic_styles() {
     $theme_color = get_option('wp_reservation_theme_color', '#8B4513');
     $theme_color_dark = adjustBrightness($theme_color, -40);
     $theme_color_light = adjustBrightness($theme_color, 40);
-    echo "<style>
+    wp_add_inline_style('wp-reservation-style', "
         :root {
             --theme-color: {$theme_color};
             --theme-color-dark: {$theme_color_dark};
             --theme-color-light: {$theme_color_light};
         }
-    </style>";
+    ");
 }
-add_action('wp_head', 'wp_reservation_dynamic_styles');
+add_action('wp_enqueue_scripts', 'wp_reservation_dynamic_styles');
 
 // 明るさを調整する関数
 function adjustBrightness($hex, $steps) {
@@ -241,42 +241,7 @@ function wp_reservation_manage_page() {
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const editButtons = document.querySelectorAll('.edit-button');
-            const editModal = document.getElementById('editModal');
-            const closeModalButtons = document.querySelectorAll('.close-modal');
-
-            editButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const id = this.dataset.id;
-                    const row = this.closest('tr');
-                    const date = row.children[1].textContent;
-                    const timeSlot = row.children[2].textContent;
-                    const name = row.children[3].textContent;
-                    const phone = row.children[4].textContent;
-                    const email = row.children[5].textContent;
-                    const notes = row.children[6].textContent;
-
-                    document.getElementById('edit_id').value = id;
-                    document.getElementById('edit_date').value = date;
-                    document.getElementById('edit_time_slot').value = timeSlot;
-                    document.getElementById('edit_name').value = name;
-                    document.getElementById('edit_phone').value = phone;
-                    document.getElementById('edit_email').value = email;
-                    document.getElementById('edit_notes').value = notes;
-
-                    editModal.style.display = 'block';
-                });
-            });
-
-            closeModalButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    editModal.style.display = 'none';
-                });
-            });
-        });
-    </script>
     <?php
+    wp_enqueue_script('wp-reservation-manage-script', plugin_dir_url(__FILE__) . 'assets/js/manage-reservations.js', [], false, true);
 }
 ?>

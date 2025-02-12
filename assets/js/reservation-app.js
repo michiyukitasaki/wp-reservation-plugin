@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const timeSlotContainer = document.createElement("div");
         timeSlotContainer.innerHTML = `
             <div class="time-slot-header">
-                <h3><i class="fas fa-clock"></i> ${date}の予約可能な時間帯</h3>
+                <h3>${date}の予約可能な時間帯</h3>
                 <p>以下の時間帯から選択してください。</p>
             </div>
         `;
@@ -174,6 +174,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                 formContainer.style.display = "block";
                             });
                         }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        slotButton.textContent = 'Error';
+                        slotButton.disabled = true;
                     });
 
                 slotList.appendChild(slotButton);
