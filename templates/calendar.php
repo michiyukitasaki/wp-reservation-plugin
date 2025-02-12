@@ -13,3 +13,6 @@ $reservation_days = get_option('wp_reservation_days', []);
 wp_enqueue_script('wp-reservation-calendar-script', plugin_dir_url(__FILE__) . '../assets/js/calendar.js', [], false, true);
 wp_enqueue_style('wp-reservation-calendar-style', plugin_dir_url(__FILE__) . '../assets/css/calendar.css');
 ?>
+<script>
+    const reservationDays = <?php echo wp_json_encode($reservation_days); ?>;
+</script>

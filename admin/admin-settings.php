@@ -5,12 +5,12 @@ if (!defined('ABSPATH')) exit; // WordPress の安全確認
 function wp_reservation_settings_page() {
     // POST リクエストを処理して設定を保存
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wp_reservation_settings_nonce'])) {
-        if (wp_verify_nonce($_POST['wp_reservation_settings_nonce'], 'save_wp_reservation_settings')) {
+        if (wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['wp_reservation_settings_nonce'])), 'save_wp_reservation_settings')) {
             // 各設定項目を保存
-            update_option('wp_reservation_days', isset($_POST['reservation_days']) ? array_map('sanitize_text_field', $_POST['reservation_days']) : []);
-            update_option('wp_reservation_time_slots', isset($_POST['time_slots']) ? sanitize_text_field($_POST['time_slots']) : '');
-            update_option('wp_reservation_max_people', isset($_POST['max_people']) ? intval($_POST['max_people']) : 3);
-            update_option('wp_reservation_theme_color', isset($_POST['theme_color']) ? sanitize_hex_color($_POST['theme_color']) : '#8B4513');
+            update_option('wp_reservation_days', isset($_POST['reservation_days']) ? array_map('sanitize_text_field', wp_unslash($_POST['reservation_days'])) : []);
+            update_option('wp_reservation_time_slots', isset($_POST['time_slots']) ? sanitize_text_field(wp_unslash($_POST['time_slots'])) : '');
+            update_option('wp_reservation_max_people', isset($_POST['max_people']) ? intval(wp_unslash($_POST['max_people'])) : 3);
+            update_option('wp_reservation_theme_color', isset($_POST['theme_color']) ? sanitize_hex_color(wp_unslash($_POST['theme_color'])) : '#8B4513');
 
             // 成功メッセージ
             echo '<div class="updated"><p>Settings saved successfully!</p></div>';
