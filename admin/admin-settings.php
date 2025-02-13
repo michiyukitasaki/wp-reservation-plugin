@@ -2,7 +2,7 @@
 if (!defined('ABSPATH')) exit; // WordPress の安全確認
 
 // 設定ページの表示関数
-function wp_reservation_settings_page() {
+function easyresy_settings_page() {
     // POST リクエストを処理して設定を保存
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wp_reservation_settings_nonce'])) {
         if (wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['wp_reservation_settings_nonce'])), 'save_wp_reservation_settings')) {

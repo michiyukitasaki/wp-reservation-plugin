@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-function wp_reservation_db_setup() {
+function easyresy_db_setup() {
     global $wpdb;
     $table_name = $wpdb->prefix . 'reservations';
 

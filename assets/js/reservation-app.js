@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const reservationTimeSlotInput = document.getElementById("reservationTimeSlot");
 
     // 予約可能な曜日と時間帯を取得
-    const reservationDays = wpReservationSettings.reservationDays || [];
-    const timeSlots = wpReservationSettings.timeSlots || [];
+    const reservationDays = easyresySettings.reservationDays || [];
+    const timeSlots = easyresySettings.timeSlots || [];
 
     console.log('Reservation Days:', reservationDays); // デバッグ用
     console.log('Time Slots:', timeSlots); // デバッグ用

@@ -16,37 +16,37 @@ require_once plugin_dir_path(__FILE__) . 'includes/settings-handler.php';
 require_once plugin_dir_path(__FILE__) . 'admin/admin-settings.php';
 
 // プラグインのアクティベーション時にデータベーステーブルを作成
-register_activation_hook(__FILE__, 'wp_reservation_db_setup');
+register_activation_hook(__FILE__, 'easyresy_db_setup');
 
 // 管理メニューの追加
-add_action('admin_menu', 'wp_reservation_admin_menu');
-function wp_reservation_admin_menu() {
+add_action('admin_menu', 'easyresy_admin_menu');
+function easyresy_admin_menu() {
     add_menu_page(
         '予約システム設定',            // ページタイトル
         '予約システムの設定',                // メニュータイトル
         'manage_options',              // 必要な権限
-        'wp-reservation-settings',     // スラッグ
-        'wp_reservation_settings_page',// コールバック関数
+        'easyresy-settings',     // スラッグ
+        'easyresy_settings_page',// コールバック関数
         'dashicons-calendar-alt'       // アイコン
     );
     add_submenu_page(
-        'wp-reservation-settings',     // 親メニューのスラッグ
+        'easyresy-settings',     // 親メニューのスラッグ
         '予約情報一覧',                    // サブメニューのページタイトル
         '予約情報一覧',                    // サブメニューの名前
         'manage_options',              // 必要な権限
-        'wp-reservation-manage',       // サブメニューのスラッグ
-        'wp_reservation_manage_page'   // コールバック関数
+        'easyresy-manage',       // サブメニューのスラッグ
+        'easyresy_manage_page'   // コールバック関数
     );
 }
 
 // スクリプトとスタイルの読み込み
-add_action('wp_enqueue_scripts', 'wp_reservation_enqueue_scripts');
-function wp_reservation_enqueue_scripts() {
-    wp_enqueue_style('wp-reservation-style', plugin_dir_url(__FILE__) . 'assets/css/style.css');
-    wp_enqueue_script('wp-reservation-script', plugin_dir_url(__FILE__) . 'assets/js/reservation-app.js', [], false, true);
+add_action('wp_enqueue_scripts', 'easyresy_enqueue_scripts');
+function easyresy_enqueue_scripts() {
+    wp_enqueue_style('easyresy-style', plugin_dir_url(__FILE__) . 'assets/css/style.css');
+    wp_enqueue_script('easyresy-script', plugin_dir_url(__FILE__) . 'assets/js/reservation-app.js', [], false, true);
 
     // 予約可能な曜日と時間帯の設定をJavaScriptに渡す
-    wp_localize_script('wp-reservation-script', 'wpReservationSettings', [
+    wp_localize_script('easyresy-script', 'easyresySettings', [
         'reservationDays' => get_option('wp_reservation_days', []),
         'timeSlots' => explode(',', get_option('wp_reservation_time_slots', ''))
     ]);
@@ -59,11 +59,11 @@ add_action('wp_enqueue_scripts', 'enqueue_font_awesome');
 add_action('admin_enqueue_scripts', 'enqueue_font_awesome');
 
 // テーマカラーを動的に適用
-function wp_reservation_dynamic_styles() {
-    $theme_color = get_option('wp_reservation_theme_color', '#8B4513');
-    $theme_color_dark = adjustBrightness($theme_color, -40);
-    $theme_color_light = adjustBrightness($theme_color, 40);
-    wp_add_inline_style('wp-reservation-style', "
+function easyresy_dynamic_styles() {
+    $theme_color = esc_attr(get_option('wp_reservation_theme_color', '#8B4513'));
+    $theme_color_dark = esc_attr(adjustBrightness($theme_color, -40));
+    $theme_color_light = esc_attr(adjustBrightness($theme_color, 40));
+    wp_add_inline_style('easyresy-style', "
         :root {
             --theme-color: {$theme_color};
             --theme-color-dark: {$theme_color_dark};
@@ -71,7 +71,7 @@ function wp_reservation_dynamic_styles() {
         }
     ");
 }
-add_action('wp_enqueue_scripts', 'wp_reservation_dynamic_styles');
+add_action('wp_enqueue_scripts', 'easyresy_dynamic_styles');
 
 // 明るさを調整する関数
 function adjustBrightness($hex, $steps) {
@@ -98,15 +98,15 @@ function adjustBrightness($hex, $steps) {
 }
 
 // ショートコードの登録
-add_shortcode('reservation_system', 'wp_reservation_form_shortcode');
-function wp_reservation_form_shortcode() {
+add_shortcode('reservation_system', 'easyresy_form_shortcode');
+function easyresy_form_shortcode() {
     ob_start();
     include plugin_dir_path(__FILE__) . 'templates/reservation-form.php';
     return ob_get_clean();
 }
 
 // 予約管理ページの表示関数
-function wp_reservation_manage_page() {
+function easyresy_manage_page() {
     global $wpdb;
     $table_name = $wpdb->prefix . 'reservations';
 
@@ -163,7 +163,7 @@ function wp_reservation_manage_page() {
         <h1>予約情報一覧</h1>
         <div class="filter-box">
             <form method="GET" action="">
-                <input type="hidden" name="page" value="wp-reservation-manage">
+                <input type="hidden" name="page" value="easyresy-manage">
                 <div class="filter-item">
                     <label for="filter_date"><strong>日付でフィルタリング:</strong></label>
                     <input type="date" id="filter_date" name="filter_date" value="<?php echo esc_attr($filter_date); ?>">
@@ -205,7 +205,7 @@ function wp_reservation_manage_page() {
                                 <td><?php echo esc_html($reservation->email); ?></td>
                                 <td><?php echo esc_html($reservation->notes); ?></td>
                                 <td>
-                                    <a href="?page=wp-reservation-manage&delete_id=<?php echo esc_attr($reservation->id); ?>" class="button">削除</a>
+                                    <a href="?page=easyresy-manage&delete_id=<?php echo esc_attr($reservation->id); ?>" class="button">削除</a>
                                     <button type="button" class="button edit-button" data-id="<?php echo esc_attr($reservation->id); ?>">編集</button>
                                 </td>
                             </tr>
@@ -242,6 +242,6 @@ function wp_reservation_manage_page() {
     </div>
 
     <?php
-    wp_enqueue_script('wp-reservation-manage-script', plugin_dir_url(__FILE__) . 'assets/js/manage-reservations.js', [], false, true);
+    wp_enqueue_script('easyresy-manage-script', plugin_dir_url(__FILE__) . 'assets/js/manage-reservations.js', [], false, true);
 }
 ?>

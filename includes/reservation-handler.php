@@ -5,19 +5,19 @@ if (!defined('ABSPATH')) exit;
 add_action('rest_api_init', function () {
     register_rest_route('wp-reservation/v1', '/reserve', [
         'methods' => 'POST',
-        'callback' => 'wp_reservation_save_reservation',
+        'callback' => 'easyresy_save_reservation',
         'permission_callback' => '__return_true'
     ]);
 
     // 予約済みの数を取得するエンドポイント
     register_rest_route('wp-reservation/v1', '/availability', [
         'methods' => 'GET',
-        'callback' => 'wp_reservation_get_availability',
+        'callback' => 'easyresy_get_availability',
         'permission_callback' => '__return_true'
     ]);
 });
 
-function wp_reservation_save_reservation($request) {
+function easyresy_save_reservation($request) {
     global $wpdb;
     $table_name = $wpdb->prefix . 'reservations';
 
@@ -54,7 +54,7 @@ function wp_reservation_save_reservation($request) {
     return ['success' => true];
 }
 
-function wp_reservation_get_availability($request) {
+function easyresy_get_availability($request) {
     global $wpdb;
     $table_name = $wpdb->prefix . 'reservations';
 

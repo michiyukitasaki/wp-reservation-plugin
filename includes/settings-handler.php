@@ -2,8 +2,8 @@
 if (!defined('ABSPATH')) exit;
 
 // Register settings
-add_action('admin_init', 'wp_reservation_register_settings');
-function wp_reservation_register_settings() {
+add_action('admin_init', 'easyresy_register_settings');
+function easyresy_register_settings() {
     register_setting('wp_reservation_settings', 'wp_reservation_days', [
         'sanitize_callback' => 'wp_reservation_sanitize_days'
     ]);
