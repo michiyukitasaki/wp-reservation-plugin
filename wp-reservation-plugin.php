@@ -52,11 +52,11 @@ function easyresy_enqueue_scripts() {
     ]);
 }
 
-function enqueue_font_awesome() {
+function easyresy_load_font_awesome() {
     wp_enqueue_style('font-awesome', plugin_dir_url(__FILE__) . 'assets/css/font-awesome.min.css');
 }
-add_action('wp_enqueue_scripts', 'enqueue_font_awesome');
-add_action('admin_enqueue_scripts', 'enqueue_font_awesome');
+add_action('wp_enqueue_scripts', 'easyresy_load_font_awesome');
+add_action('admin_enqueue_scripts', 'easyresy_load_font_awesome');
 
 // テーマカラーを動的に適用
 function easyresy_dynamic_styles() {
@@ -98,7 +98,7 @@ function adjustBrightness($hex, $steps) {
 }
 
 // ショートコードの登録
-add_shortcode('reservation_system', 'easyresy_form_shortcode');
+add_shortcode('easyresy_reservation_system', 'easyresy_form_shortcode');
 function easyresy_form_shortcode() {
     ob_start();
     include plugin_dir_path(__FILE__) . 'templates/reservation-form.php';
