@@ -37,7 +37,7 @@ function easyresy_save_reservation($request) {
         $date, $time_slot
     ));
 
-    $max_people = get_option('wp_reservation_max_people', 3);
+    $max_people = get_option('easyresy_reservation_max_people', 3);
     if ($count >= $max_people) {
         return new WP_Error('slot_full', 'This time slot is fully booked.', ['status' => 400]);
     }
@@ -66,7 +66,7 @@ function easyresy_get_availability($request) {
         $date, $time_slot
     ));
 
-    $max_people = get_option('wp_reservation_max_people', 3);
+    $max_people = get_option('easyresy_reservation_max_people', 3);
     $available = $max_people - $count;
 
     return ['available' => $available];

@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-$reservation_days = get_option('wp_reservation_days', []);
+$reservation_days = get_option('easyresy_reservation_days', []);
 ?>
 
 <div id="wp-reservation-calendar-container">

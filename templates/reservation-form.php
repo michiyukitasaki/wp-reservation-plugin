@@ -1,8 +1,8 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-$reservation_days = get_option('wp_reservation_days', []);
-$time_slots = explode(',', get_option('wp_reservation_time_slots', ''));
+$reservation_days = get_option('easyresy_reservation_days', []);
+$time_slots = explode(',', get_option('easyresy_reservation_time_slots', ''));
 ?>
 
 <div id="wp-reservation-form-container">

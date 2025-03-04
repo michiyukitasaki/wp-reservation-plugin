@@ -47,8 +47,8 @@ function easyresy_enqueue_scripts() {
 
     // 予約可能な曜日と時間帯の設定をJavaScriptに渡す
     wp_localize_script('easyresy-script', 'easyresySettings', [
-        'reservationDays' => get_option('wp_reservation_days', []),
-        'timeSlots' => explode(',', get_option('wp_reservation_time_slots', ''))
+        'reservationDays' => get_option('easyresy_reservation_days', []),
+        'timeSlots' => explode(',', get_option('easyresy_reservation_time_slots', ''))
     ]);
 }
 
@@ -60,7 +60,7 @@ add_action('admin_enqueue_scripts', 'easyresy_load_font_awesome');
 
 // テーマカラーを動的に適用
 function easyresy_dynamic_styles() {
-    $theme_color = esc_attr(get_option('wp_reservation_theme_color', '#8B4513'));
+    $theme_color = esc_attr(get_option('easyresy_reservation_theme_color', '#8B4513'));
     $theme_color_dark = esc_attr(adjustBrightness($theme_color, -40));
     $theme_color_light = esc_attr(adjustBrightness($theme_color, 40));
     wp_add_inline_style('easyresy-style', "

@@ -1,15 +1,15 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-$reservation_days = get_option('wp_reservation_days', []);
-$time_slots = get_option('wp_reservation_time_slots', '');
-$max_people = get_option('wp_reservation_max_people', 3);
+$reservation_days = get_option('easyresy_reservation_days', []);
+$time_slots = get_option('easyresy_reservation_time_slots', '');
+$max_people = get_option('easyresy_reservation_max_people', 3);
 ?>
 
 <div class="wrap">
     <h1>Reservation Settings</h1>
     <form method="POST" action="">
-        <?php wp_nonce_field('save_wp_reservation_settings', 'wp_reservation_settings_nonce'); ?>
+        <?php wp_nonce_field('save_easyresy_reservation_settings', 'easyresy_reservation_settings_nonce'); ?>
         <table class="form-table">
             <tr>
                 <th><label for="reservation_days">Reservation Days</label></th>

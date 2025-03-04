@@ -1,7 +1,7 @@
 :root {
-    --theme-color: <?php echo get_option('wp_reservation_theme_color', '#8B4513'); ?>;
-    --theme-color-dark: <?php echo adjustBrightness(get_option('wp_reservation_theme_color', '#8B4513'), -40); ?>;
-    --theme-color-light: <?php echo adjustBrightness(get_option('wp_reservation_theme_color', '#8B4513'), 40); ?>;
+    --theme-color: <?php echo get_option('easyresy_reservation_theme_color', '#8B4513'); ?>;
+    --theme-color-dark: <?php echo adjustBrightness(get_option('easyresy_reservation_theme_color', '#8B4513'), -40); ?>;
+    --theme-color-light: <?php echo adjustBrightness(get_option('easyresy_reservation_theme_color', '#8B4513'), 40); ?>;
 }
 
 /* カレンダーの基本スタイル */
