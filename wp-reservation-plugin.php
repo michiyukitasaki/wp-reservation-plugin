@@ -74,7 +74,7 @@ function easyresy_dynamic_styles() {
 add_action('wp_enqueue_scripts', 'easyresy_dynamic_styles');
 
 // 明るさを調整する関数
-function adjustBrightness($hex, $steps) {
+function easyresy__adjustBrightness($hex, $steps) {
     // Ensure steps is between -255 and 255
     $steps = max(-255, min(255, $steps));
 
