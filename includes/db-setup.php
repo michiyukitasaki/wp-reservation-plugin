@@ -21,4 +21,3 @@ function easyresy_db_setup() {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql);
 }
-?>

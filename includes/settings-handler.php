@@ -55,4 +55,3 @@ function easyresy_reservation_sanitize_days($input) {
 
     return $output;
 }
-?>

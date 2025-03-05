@@ -71,4 +71,4 @@ function easyresy_get_availability($request) {
 
     return ['available' => $available];
 }
-?>
+
