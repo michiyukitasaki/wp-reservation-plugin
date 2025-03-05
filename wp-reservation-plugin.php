@@ -61,8 +61,8 @@ add_action('admin_enqueue_scripts', 'easyresy_load_font_awesome');
 // テーマカラーを動的に適用
 function easyresy_dynamic_styles() {
     $theme_color = esc_attr(get_option('easyresy_reservation_theme_color', '#8B4513'));
-    $theme_color_dark = esc_attr(adjustBrightness($theme_color, -40));
-    $theme_color_light = esc_attr(adjustBrightness($theme_color, 40));
+    $theme_color_dark = esc_attr(easyresy_adjustBrightness($theme_color, -40));
+    $theme_color_light = esc_attr(easyresy_adjustBrightness($theme_color, 40));
     wp_add_inline_style('easyresy-style', "
         :root {
             --theme-color: {$theme_color};
@@ -74,7 +74,7 @@ function easyresy_dynamic_styles() {
 add_action('wp_enqueue_scripts', 'easyresy_dynamic_styles');
 
 // 明るさを調整する関数
-function easyresy__adjustBrightness($hex, $steps) {
+function easyresy_adjustBrightness($hex, $steps) {
     // Ensure steps is between -255 and 255
     $steps = max(-255, min(255, $steps));
 
