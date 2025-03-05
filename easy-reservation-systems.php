@@ -120,7 +120,7 @@ function easyresy_manage_page() {
         $query .= $wpdb->prepare(" AND date = %s", $filter_date);
     }
     if ($filter_month) {
-        $query .= $wpdb->prepare(" AND DATE_FORMAT(date, '%Y-%m') = %s", $filter_month);
+        $query .= " AND DATE_FORMAT(date, '%Y-%m') = " . $wpdb->prepare("%s", $filter_month);
     }
     if ($filter_name) {
         $query .= $wpdb->prepare(" AND name LIKE %s", '%' . $wpdb->esc_like($filter_name) . '%');
