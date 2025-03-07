@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         // フォームデータを送信する処理を追加
         const formData = new FormData(form);
-        fetch('/wp-json/wp-reservation/v1/reserve', {
+        fetch('/wp-json/easyresy/v1/reserve', {
             method: 'POST',
             body: formData
         })

@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 slotButton.textContent = slot;
 
                 // 予約可能な残数を取得して表示
-                fetch(`/wp-json/wp-reservation/v1/availability?date=${encodeURIComponent(date)}&time_slot=${encodeURIComponent(slot)}`)
+                fetch(`/wp-json/easyresy/v1/availability?date=${encodeURIComponent(date)}&time_slot=${encodeURIComponent(slot)}`)
                     .then(response => response.json())
                     .then(data => {
                         const badge = document.createElement("span");

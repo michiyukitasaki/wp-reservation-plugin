@@ -3,14 +3,14 @@ if (!defined('ABSPATH')) exit;
 
 // Handle reservation API endpoint
 add_action('rest_api_init', function () {
-    register_rest_route('wp-reservation/v1', '/reserve', [
+    register_rest_route('easyresy/v1', '/reserve', [
         'methods' => 'POST',
         'callback' => 'easyresy_save_reservation',
         'permission_callback' => '__return_true'
     ]);
 
     // 予約済みの数を取得するエンドポイント
-    register_rest_route('wp-reservation/v1', '/availability', [
+    register_rest_route('easyresy/v1', '/availability', [
         'methods' => 'GET',
         'callback' => 'easyresy_get_availability',
         'permission_callback' => '__return_true'
